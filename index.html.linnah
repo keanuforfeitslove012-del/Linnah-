@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Linnah 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 105, 180, 0.3);
+            animation: float 15s infinite linear;
+            bottom: -100px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 1s ease-in;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Opening Section */
+        .opening h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .opening p {
+            font-size: 1.3rem;
+            color: #e6e6fa;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            border: none;
+            padding: 18px 50px;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5);
+        }
+
+        /* Questions Section */
+        .questions h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffb6c1;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 105, 180, 0.3);
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            background: transparent;
+            border: 2px solid #ff69b4;
+            color: #ff69b4;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover {
+            background: #ff69b4;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Love Letter Section */
+        .love-letter {
+            max-width: 700px;
+        }
+
+        .letter-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 182, 193, 0.2);
+            border-radius: 30px;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-container::before {
+            content: '❝';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            color: rgba(255, 105, 180, 0.2);
+            font-family: serif;
+        }
+
+        .love-letter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff69b4;
+        }
+
+        .letter-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #f0e6ff;
+            text-align: left;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .letter-text p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+
+        /* Surprise Section */
+        .surprise {
+            position: relative;
+        }
+
+        .surprise h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ffd700, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .music-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .music-note {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .song-title {
+            font-size: 1.5rem;
+            color: #ff69b4;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .song-artist {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .play-btn:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .final-message {
+            margin-top: 40px;
+            font-size: 1.3rem;
+            color: #ffb6c1;
+            font-style: italic;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Progress Indicator */
+        .progress {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ff69b4;
+            box-shadow: 0 0 20px #ff69b4;
+            transform: scale(1.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .opening h1 { font-size: 2.5rem; }
+            .questions h2, .love-letter h2, .surprise h2 { font-size: 1.8rem; }
+            .letter-container { padding: 30px; }
+            .letter-text { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Progress Dots -->
+    <div class="progress">
+        <div class="dot active" onclick="goToSection(0)"></div>
+        <div class="dot" onclick="goToSection(1)"></div>
+        <div class="dot" onclick="goToSection(2)"></div>
+        <div class="dot" onclick="goToSection(3)"></div>
+    </div>
+
+    <div class="container">
+        <!-- Section 1: Opening -->
+        <section class="section active" id="section-0">
+            <div class="opening">
+                <h1>Hey Linnah 💝</h1>
+                <p>I've been waiting for the perfect moment to tell you something...</p>
+                <button class="btn" onclick="nextSection()">Begin the Journey ✨</button>
+            </div>
+        </section>
+
+        <!-- Section 2: Questions -->
+        <section class="section" id="section-1">
+            <div class="questions">
+                <h2>Before we continue...</h2>
+                
+                <div class="question-card" id="q1">
+                    <div class="question-text">Do you know how much you mean to me?</div>
+                    <div class="options">
+                        <button class="option-btn" onclick="answerQuestion(1, 'a lot')">A lot?</button>
+                        <button class="option-btn" onclick="answerQuestion(1, 'more')">More than a lot?</button>
+                        <button class="option-btn" onclick="answerQuestion(1, 'infinity')">To infinity?</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="q2" style="display: none;">
+                    <div class="question-text">What's your favorite thing about us?</div>
+                    <div class="options">
+                        <button class="option-btn" onclick="answerQuestion(2, 'laugh')">The way we laugh together</button>
+                        <button class="option-btn" onclick="answerQuestion(2, 'talk')">Our late night talks</button>
+                        <button class="option-btn" onclick="answerQuestion(2, 'everything')">Simply everything</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="q3" style="display: none;">
+                    <div class="question-text">Ready to hear what's in my heart?</div>
+                    <div class="options">
+                        <button class="option-btn" onclick="nextSection()">Yes, always 💕</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Love Letter -->
+        <section class="section" id="section-2">
+            <div class="love-letter">
+                <div class="letter-container">
+                    <h2>To My Dearest Linnah</h2>
+                    <div class="letter-text">
+                        <p>From the moment you entered my life, everything changed. The colors became brighter, the laughter became louder, and my heart found a rhythm it had never known before. You are not just someone I love—you are the peace in my chaos, the warmth in my cold days, and the smile that greets me every morning even when you're not physically there.</p>
+                        
+                        <p>I've thought about how to describe what you mean to me, but words always fall short. You're like that favorite song I never skip, the cozy feeling of home after a long journey, and the beautiful silence between two people who understand each other perfectly. With you, I don't have to be anyone else. You see me—all of me—and choose to stay. That is a gift I will never take for granted.</p>
+                        
+                        <p>Every moment with you, whether we're having deep conversations at 2 AM or just sitting in comfortable silence, feels like exactly where I'm meant to be. You inspire me to be better, love harder, and dream bigger. Your strength amazes me, your kindness humbles me, and your love transforms me.</p>
+                        
+                        <p>This isn't a proposal—it's a promise. A promise to keep choosing you, to keep learning you, to keep growing with you. To be your safe place, your biggest supporter, and your partner in all of life's adventures. I don't know what the future holds, but I know I want to face it with you.</p>
+                        
+                        <p>Happy Valentine's Day, Linnah. You are my favorite notification, my favorite person, and my favorite everything. Here's to us, to now, and to all the beautiful moments yet to come.</p>
+                        
+                        <p style="text-align: right; margin-top: 30px; font-style: italic;">Forever yours,<br>❤️</p>
+                    </div>
+                </div>
+                <button class="btn" onclick="nextSection()" style="margin-top: 40px;">There's one more thing... 🎁</button>
+            </div>
+        </section>
+
+        <!-- Section 4: Surprise -->
+        <section class="section" id="section-3">
+            <div class="surprise">
+                <h2>A Song That Reminds Me of You</h2>
+                
+                <div class="music-container">
+                    <div class="music-note">🎵</div>
+                    <div class="song-title">Perfect</div>
+                    <div class="song-artist">Ed Sheeran</div>
+                    <p style="color: #ddd; margin-bottom: 20px; font-style: italic;">"Darling, you look perfect tonight"</p>
+                    <a href="https://music.youtube.com/watch?v=K2XCMnB6984&si=P1mxDWLHwxHBLcl0" target="_blank" class="play-btn">▶ Play on YouTube Music</a>
+                </div>
+
+                <div class="final-message">
+                    Every time I hear this song, I think of you.<br>
+                    You are my perfect.<br><br>
+                    Happy Valentine's Day, Linnah. I love you. 💖
+                </div>
+
+                <button class="btn" onclick="goToSection(0)" style="margin-top: 40px; background: transparent; border: 2px solid #ff69b4;">Watch Again ↻</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        const totalSections = 4;
+
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const heartSymbols = ['💕', '💖', '💗', '💓', '💝', '🌹', '✨'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 20000);
+            }, 800);
+        }
+
+        // Create sparkles for surprise section
+        function createSparkles() {
+            const section = document.getElementById('section-3');
+            for(let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                section.appendChild(sparkle);
+            }
+        }
+
+        function updateProgress() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSection);
+            });
+        }
+
+        function goToSection(index) {
+            if (index < 0 || index >= totalSections) return;
+            
+            document.getElementById(`section-${currentSection}`).classList.remove('active');
+            currentSection = index;
+            document.getElementById(`section-${currentSection}`).classList.add('active');
+            updateProgress();
+            
+            if (currentSection === 3) createSparkles();
+        }
+
+        function nextSection() {
+            goToSection(currentSection + 1);
+        }
+
+        function answerQuestion(qNum, answer) {
+            // Add some personality based on answer
+            const card = document.getElementById(`q${qNum}`);
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.display = 'none';
+                if (qNum < 3) {
+                    document.getElementById(`q${qNum + 1}`).style.display = 'block';
+                }
+            }, 300);
+        }
+
+        // Initialize
+        createHearts();
+        updateProgress();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSection();
+            if (e.key === 'ArrowLeft') goToSection(currentSection - 1);
+        });
+    </script>
+</body>
+</html>
