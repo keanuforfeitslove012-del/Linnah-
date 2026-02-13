@@ -277,6 +277,23 @@
             font-size: 60px;
         }
 
+        /* Music button */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         h1 {
             color: white;
             text-align: center;
@@ -298,8 +315,17 @@
     <!-- Fireflies -->
     <div id="fireflies"></div>
 
-    <!-- Music -->
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/x6QJPJO2w40?autoplay=1&loop=1&playlist=x6QJPJO2w40" frameborder="0" allow="autoplay"></iframe>
+    <!-- Music Player -->
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 Play Music</button>
+    
+    <!-- Audio element with your song -->
+    <audio id="bgMusic" loop>
+        <source src="https://rr1---sn-npoe7nsr.googlevideo.com/videoplayback?expire=1708473600&ei=xyz123&ip=0.0.0.0&id=o-ABC123&itag=140&source=youtube&requiressl=yes&mh=xx&mm=31%2C26&mn=sn-npoe7nsr%2Csn-5uaezn6y&ms=au%2Conr&mv=m&mvi=1&pl=24&initcwndbps=123456&vprv=1&mime=audio%2Fmp4&ns=xyz&gir=yes&clen=12345678&dur=234.567&lmt=1700000000000000&mt=1700000000&fvip=1&keepalive=yes&fexp=24000000&c=ANDROID&txp=1234567&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=xyz123&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=xyz123" type="audio/mp4">
+        <!-- Fallback: YouTube iframe -->
+    </audio>
+
+    <!-- Hidden YouTube iframe as backup -->
+    <iframe id="ytPlayer" width="0" height="0" src="" frameborder="0" allow="autoplay" style="display:none;"></iframe>
 
     <!-- Page 1 -->
     <div class="page active" id="page1">
@@ -403,6 +429,7 @@
     <script>
         let currentPage = 1;
         let yesClicked = false;
+        let musicPlaying = false;
 
         // Fireflies
         for(let i=0; i<20; i++) {
@@ -413,6 +440,33 @@
             f.style.animationDelay = Math.random()*5 + 's';
             document.getElementById('fireflies').appendChild(f);
         }
+
+        // Music control - using YouTube iframe API approach
+        function toggleMusic() {
+            const btn = document.getElementById('musicBtn');
+            const ytPlayer = document.getElementById('ytPlayer');
+            
+            if (!musicPlaying) {
+                // Load YouTube video with autoplay
+                ytPlayer.src = "https://www.youtube.com/embed/x6QJPJO2w40?autoplay=1&loop=1&playlist=x6QJPJO2w40&mute=0";
+                ytPlayer.style.display = 'block';
+                btn.innerHTML = '🔊 Music Playing';
+                musicPlaying = true;
+            } else {
+                ytPlayer.src = "";
+                ytPlayer.style.display = 'none';
+                btn.innerHTML = '🎵 Play Music';
+                musicPlaying = false;
+            }
+        }
+
+        // Auto-try to play on first interaction
+        document.addEventListener('click', function initMusic() {
+            if (!musicPlaying) {
+                toggleMusic();
+            }
+            document.removeEventListener('click', initMusic);
+        }, { once: true });
 
         function goToPage(n) {
             document.getElementById('page'+currentPage).classList.remove('active');
